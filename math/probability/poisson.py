@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Module that defines a Poisson distribution."""
 
-from math import exp, factorial
-
 
 class Poisson:
     """Represents a Poisson distribution."""
@@ -31,4 +29,10 @@ class Poisson:
         if k < 0:
             return 0
 
-        return (self.lambtha ** k * exp(-self.lambtha)) / factorial(k)
+        factorial = 1
+        for i in range(1, k + 1):
+            factorial *= i
+
+        e = 2.7182818285
+
+        return (self.lambtha ** k * e ** (-self.lambtha)) / factorial
