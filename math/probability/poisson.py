@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Module that defines a Poisson distribution."""
 
+from math import exp, factorial
+
 
 class Poisson:
     """Represents a Poisson distribution."""
@@ -21,3 +23,12 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
 
             self.lambtha = float(sum(data) / len(data))
+
+    def pmf(self, k):
+        """Calculate the PMF for k successes."""
+        k = int(k)
+
+        if k < 0:
+            return 0
+
+        return (self.lambtha ** k * exp(-self.lambtha)) / factorial(k)
