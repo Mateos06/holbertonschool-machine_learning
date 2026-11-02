@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
-"""Plot numeric feature distributions by churn."""
+"""Plot numeric distributions by churn."""
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def plot_numeric_vs_churn(df, col):
-    """Plot numeric feature distributions for each churn category."""
+    """Compare numeric feature distributions by churn."""
     plt.figure(figsize=(12, 8))
 
-    plt.hist(
-        [
-            df[df["Churn"] == "No"][col],
-            df[df["Churn"] == "Yes"][col]
-        ],
+    sns.histplot(
+        data=df,
+        x=col,
+        hue="Churn",
+        hue_order=["No", "Yes"],
         bins=30,
-        label=["No", "Yes"],
-        color=["tab:blue", "tab:orange"]
+        multiple="dodge",
+        shrink=1,
+        palette=["tab:blue", "tab:orange"]
     )
 
     plt.title(f"{col} Distribution by Churn")
     plt.xlabel(col)
-    plt.legend(title="Churn", loc="upper center")
 
     plt.show()
+    return None
