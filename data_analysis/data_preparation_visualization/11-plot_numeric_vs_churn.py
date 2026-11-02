@@ -22,3 +22,4 @@ def plot_numeric_vs_churn(df, col):
     plt.xlabel(col)
 
     plt.show()
+    return None
