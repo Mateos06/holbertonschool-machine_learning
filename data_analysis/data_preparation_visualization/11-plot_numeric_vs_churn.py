@@ -1,30 +1,29 @@
 #!/usr/bin/env python3
-"""Plot numeric distributions by churn."""
+"""Plot numeric feature distributions by churn."""
 
 import matplotlib.pyplot as plt
 
 
 def plot_numeric_vs_churn(df, col):
-    """Compare numeric feature distributions by churn."""
+    """Plot numeric feature distributions for each churn category."""
     plt.figure(figsize=(12, 8))
 
-    plt.hist(
-        df[df['Churn'] == 'Yes'][col],
-        bins=30,
-        alpha=0.5,
-        label='Yes'
-    )
+    no_churn = df[df["Churn"] == "No"][col]
+
+    yes_churn = df[df["Churn"] == "Yes"][col]
 
     plt.hist(
-        df[df['Churn'] == 'No'][col],
+        [
+            no_churn,
+            yes_churn
+        ],
         bins=30,
-        alpha=0.5,
-        label='No'
+        label=["No", "Yes"],
+        color=["tab:blue", "tab:orange"]
     )
 
-    plt.title(f'{col} Distribution by Churn')
+    plt.title("{} Distribution by Churn".format(col))
     plt.xlabel(col)
-    plt.legend(title='Churn')
+    plt.legend(title="Churn", loc="upper center")
 
     plt.show()
-    return None
