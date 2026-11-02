@@ -27,3 +27,4 @@ def plot_numeric_vs_churn(df, col):
     plt.legend(title="Churn", loc="upper center")
 
     plt.show()
+    return None
