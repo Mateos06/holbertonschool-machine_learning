@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Plot categorical feature distributions.
+Visualize categorical feature distributions.
 """
 import matplotlib.pyplot as plt
 
 
 def plot_categorical_distributions(df, columns_to_plot=None):
     """
-    Visualize categorical columns using bar plots.
+    Plot categorical distributions in a grid.
     """
     if columns_to_plot is None:
         columns_to_plot = df.select_dtypes(
@@ -31,8 +31,8 @@ def plot_categorical_distributions(df, columns_to_plot=None):
         axes[i].set_title(col)
         axes[i].tick_params(axis='x', rotation=45)
 
-    for i in range(len(columns_to_plot), len(axes)):
-        axes[i].axis('off')
+    for j in range(len(columns_to_plot), len(axes)):
+        fig.delaxes(axes[j])
 
     plt.tight_layout()
     plt.savefig("Task_7.png")

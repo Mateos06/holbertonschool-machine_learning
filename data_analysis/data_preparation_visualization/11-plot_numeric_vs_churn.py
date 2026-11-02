@@ -18,13 +18,11 @@ def plot_numeric_vs_churn(df, col):
             yes_churn
         ],
         bins=30,
-        label=["No", "Yes"],
-        color=["tab:blue", "tab:orange"]
+        label=["No", "Yes"]
     )
 
     plt.title("{} Distribution by Churn".format(col))
     plt.xlabel(col)
-    plt.legend(title="Churn", loc="upper center")
+    plt.legend(title="Churn")
 
     plt.show()
-    return None
