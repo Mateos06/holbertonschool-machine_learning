@@ -2,7 +2,6 @@
 """Visualize churn rates by categorical feature."""
 
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def plot_categorical_vs_churn(df, col):
@@ -13,11 +12,11 @@ def plot_categorical_vs_churn(df, col):
 
     plt.figure(figsize=(12, 8))
 
-    sns.barplot(x=churn_rate.index, y=churn_rate.values)
+    churn_rate.plot(kind="bar")
 
     plt.title(f"Churn Rate by {col}")
     plt.ylabel("Churn Rate")
     plt.xticks(rotation=45)
 
     plt.show()
-
+    return None
