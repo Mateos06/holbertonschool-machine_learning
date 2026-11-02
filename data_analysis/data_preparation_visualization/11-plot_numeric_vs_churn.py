@@ -13,11 +13,8 @@ def plot_numeric_vs_churn(df, col):
         data=df,
         x=col,
         hue="Churn",
-        hue_order=["No", "Yes"],
         bins=30,
-        multiple="dodge",
-        shrink=1,
-        palette=["tab:blue", "tab:orange"]
+        multiple="layer"
     )
 
     plt.title(f"{col} Distribution by Churn")
