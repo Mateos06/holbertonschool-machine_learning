@@ -9,11 +9,11 @@ def encode_features(df):
     """Encode features and return fitted encoders."""
     df = df.copy()
 
-    # 1. Label encode Churn
+    # Label encode Churn
     churn_le = preprocessing.LabelEncoder()
     df["Churn"] = churn_le.fit_transform(df["Churn"])
 
-    # 2. Ordinal encode binary columns
+    # Ordinal encode binary columns
     binary_cols = [
         "Partner",
         "Dependents",
@@ -30,16 +30,14 @@ def encode_features(df):
             df[[col]]
         ).astype(int)
 
-    # 3. Ordinal encode TenureGroup
-    tenure_oe = preprocessing.OrdinalEncoder(
-        categories=[sorted(df["TenureGroup"].unique())]
-    )
+    # Ordinal encode TenureGroup
+    tenure_oe = preprocessing.OrdinalEncoder()
 
     df[["TenureGroup"]] = tenure_oe.fit_transform(
         df[["TenureGroup"]]
     ).astype(int)
 
-    # 4. One-hot encode categorical columns
+    # One-hot encode Contract and PaymentMethod
     df = pd.get_dummies(
         df,
         columns=["Contract", "PaymentMethod"],
