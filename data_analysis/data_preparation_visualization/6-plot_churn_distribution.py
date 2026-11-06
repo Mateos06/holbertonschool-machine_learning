@@ -11,10 +11,10 @@ def plot_churn_distribution(df):
     counts = df["Churn"].value_counts()
     counts = counts.reindex(["No", "Yes"], fill_value=0)
 
-    counts.plot(
-        kind="bar",
-        color=["skyblue", "salmon"],
-        rot=0
+    plt.bar(
+        counts.index,
+        counts.values,
+        color=["skyblue", "salmon"]
     )
 
     plt.title("Churn Distribution")
