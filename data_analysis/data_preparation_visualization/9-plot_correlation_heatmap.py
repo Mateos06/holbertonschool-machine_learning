@@ -20,5 +20,7 @@ def plot_correlation_heatmap(df):
         vmax=1
     )
 
+    plt.title("Correlation Matrix")
     plt.show()
+
     return None

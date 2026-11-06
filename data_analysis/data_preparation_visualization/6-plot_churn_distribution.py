@@ -17,7 +17,6 @@ def plot_churn_distribution(df):
     )
 
     plt.title('Churn Distribution')
-    plt.xlabel('Churn')
     plt.ylabel('Count')
 
     plt.tight_layout()
