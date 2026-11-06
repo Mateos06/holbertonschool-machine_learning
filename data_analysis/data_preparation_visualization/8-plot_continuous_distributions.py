@@ -11,19 +11,14 @@ def plot_continuous_distributions(df, columns_to_plot=None):
 
     if columns_to_plot is None:
         columns_to_plot = df.select_dtypes(
-            include="number"
+            include=["number"]
         ).columns.tolist()
 
-    n_rows = len(columns_to_plot)
+    n_cols = len(columns_to_plot)
 
-    if n_rows == 0:
-        return None
+    fig, axes = plt.subplots(n_cols, 2, figsize=(10, 3*n_cols))
 
-    fig, axes = plt.subplots(
-        n_rows, 2, figsize=(15, 3 * n_rows)
-    )
-
-    if n_rows == 1:
+    if n_cols == 1:
         axes = axes.reshape(1, -1)
 
     for i, col in enumerate(columns_to_plot):
@@ -41,7 +36,8 @@ def plot_continuous_distributions(df, columns_to_plot=None):
         x = np.linspace(data.min(), data.max(), 100)
 
         axes[i, 0].plot(
-            x, kde(x),
+            x,
+            kde(x),
             color="red",
             linestyle="--"
         )
