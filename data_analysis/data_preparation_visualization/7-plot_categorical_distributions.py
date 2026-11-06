@@ -1,33 +1,35 @@
 #!/usr/bin/env python3
-"""
-Visualize categorical feature distributions.
-"""
+"""Visualize categorical feature distributions."""
+
 import matplotlib.pyplot as plt
 
 
 def plot_categorical_distributions(df, columns_to_plot=None):
-    """
-    Plot categorical distributions in a grid.
-    """
+    """Plot categorical distributions in a grid."""
+
     if columns_to_plot is None:
         columns_to_plot = df.select_dtypes(
             include=['object']
-        ).columns.drop('Churn').tolist()
+        ).columns.drop('Churn', errors='ignore').tolist()
     else:
         columns_to_plot = list(columns_to_plot)
 
-    n_cols = 3
+    if not columns_to_plot:
+        return None
+
+    n_cols = min(3, len(columns_to_plot))
     n_rows = (len(columns_to_plot) + n_cols - 1) // n_cols
 
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 5*n_rows))
+    fig, axes = plt.subplots(
+        n_rows, n_cols, figsize=(15, 5 * n_rows)
+    )
 
-    axes = axes.flatten()
+    axes = axes.flatten() if hasattr(axes, 'flatten') else [axes]
 
     for i, col in enumerate(columns_to_plot):
-        df[col].value_counts().plot(
-            kind='bar',
-            ax=axes[i]
-        )
+        counts = df[col].value_counts()
+
+        axes[i].bar(counts.index, counts.values)
         axes[i].set_title(col)
         axes[i].tick_params(axis='x', rotation=45)
 
@@ -37,3 +39,5 @@ def plot_categorical_distributions(df, columns_to_plot=None):
     plt.tight_layout()
     plt.savefig("Task_7.png")
     plt.show()
+
+    return None

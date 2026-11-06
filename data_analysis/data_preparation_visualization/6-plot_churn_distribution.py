@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""
-Plot churn distribution.
-"""
+"""Plot churn distribution."""
+
 import matplotlib.pyplot as plt
 
 
 def plot_churn_distribution(df):
-    """
-    Visualize the distribution of churn classes.
-    """
+    """Visualize the distribution of churn classes."""
     plt.figure(figsize=(12, 8))
 
     counts = df['Churn'].value_counts()
 
-    counts.plot(
-        kind='bar',
+    plt.bar(
+        ['No', 'Yes'],
+        [counts.get('No', 0), counts.get('Yes', 0)],
         color=['skyblue', 'salmon']
     )
 
@@ -24,3 +22,5 @@ def plot_churn_distribution(df):
 
     plt.tight_layout()
     plt.show()
+
+    return None
