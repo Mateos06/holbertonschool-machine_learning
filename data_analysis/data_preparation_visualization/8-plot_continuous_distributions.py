@@ -61,4 +61,3 @@ def plot_continuous_distributions(df, columns_to_plot=None):
     # Save a copy of the figure, then display it
     plt.savefig("Task_8.png")
     plt.show()
-    
