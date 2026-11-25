@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""Module for building a decision tree classifier."""
+
+
 from sklearn import tree
 
 
